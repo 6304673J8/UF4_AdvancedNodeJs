@@ -1,0 +1,27 @@
+{
+  "name": "databases_uf4",
+  "version": "0.4.2",
+  "description": "Chat with MongoDB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/6304673J8/databases_uf4.git"
+  },
+  "keywords": [
+    "MongoDB",
+    "Html"
+  ],
+  "author": "6304673J8",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/6304673J8/databases_uf4/issues"
+  },
+  "homepage": "https://github.com/6304673J8/databases_uf4#readme",
+  "dependencies": {
+    "mongodb": "^3.6.6",
+    "node-static": "^0.7.11"
+  }
+}
