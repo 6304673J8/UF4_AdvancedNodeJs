@@ -1,19 +1,39 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>HYPO ENTI V.00000000042</title>
 	</head>
 
 	<body>
 		<main>
-			<form id="chatForm">
+			<form>
 				<p>
-					<input type="text" id="inputField">
-					<button id="inputSubmit">Enviar</button>
+					<input type="text" name="player" id="player" placeholder="Nombre de Usuario"/>
+					<input type="text" name="chatText" id="chatText" placeholder="Mensaje" />
+					<button>Enviar</button>
 				</p>
-				<div id="chat">
-				
-				</div>
+			
 			</form>
+			<div id="chat">
+
+			</div>
 		</main>
+		
+		<script>
+			const refresh_time = 500;
+			
+			setInterval(() => {
+				fetch("/chat")
+					.then( response => response.json())
+					.then( data => {
+						let list = '';
+						for (let i = 0; i < data.length; i++){
+							list += "<li>"+data[i].player+": "+data[i].chatText+"</li>";
+						}
+						document.getElementById("chat").innerHTML = "<ul>"+list+"</ul>";
+					
+				});
+			}, refresh_time);
+		</script>
 	</body>
 </html>
