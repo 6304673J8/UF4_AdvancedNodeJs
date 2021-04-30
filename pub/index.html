@@ -1,27 +1,43 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="UTF-8" />
 		<title>HYPO ENTI V.00000000042</title>
 	</head>
 
 	<body>
 		<main>
-			<form>
+			<form id="chat-form">
 				<p>
 					<input type="text" name="player" id="player" placeholder="Nombre de Usuario"/>
 					<input type="text" name="chatText" id="chatText" placeholder="Mensaje" />
 					<button>Enviar</button>
 				</p>
-			
+
 			</form>
 			<div id="chat">
 
 			</div>
 		</main>
-		
+
 		<script>
 			const refresh_time = 500;
-			
+			document.getElementByID("chat-form").addEventListener('submit', e => {
+       				e.preventDefault();
+        			let user = document.getElementByID("player").value;
+				let msg = document.getElementByID("chatText").value;
+
+    				fetch("/submit", {
+        				method: "POST",
+        				headers: {
+   					 	'Content-Type': 'text/json'
+					},
+					body: JSON.stringify({
+    						chat_user: user,
+    						chat_msg: msg
+					})
+				});
+			});
 			setInterval(() => {
 				fetch("/chat")
 					.then( response => response.json())
