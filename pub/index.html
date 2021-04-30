@@ -44,7 +44,7 @@
 					.then( data => {
 						let list = '';
 						for (let i = 0; i < data.length; i++){
-							list += "<li>"+data[i].player+": "+data[i].chatText+"</li>";
+							list += "<li>"+data[i].user+": "+data[i].msg+"</li>";
 						}
 						document.getElementById("chat").innerHTML = "<ul>"+list+"</ul>";
 					

@@ -5,8 +5,10 @@ const node_static = require("node-static");
 
 const mongo = require("mongodb").MongoClient;
 
-let server_url = "mongodb://localhost:27017"
+let server_url = "mongodb://localhost:27017";
+
 let chat_db;
+
 mongo.connect(server_url, (err, server) => {
 	if(err){
 		console.log("Error connecting to MongoDB");
@@ -49,10 +51,6 @@ http.createServer( (request, response) => {
 			body.push(chunk);
 		}).on('end', () => {
 			let chat_data = JSON.parse(Buffer.concat(body).toString());
-
-			chat_db.collection("chat").insertOne()({
-			
-			});
 		});
 
 		response.end();
