@@ -26,32 +26,30 @@ console.log("INIT CHAT SERVER");
 let public_files = new node_static.Server("pub");
 
 http.createServer( (request, response) => {
-	console.log("File"+request.url);
-	if (request.url == "/chat"){
-		//console.log("Chat Starting");
-		let cursor = chat_db.collection("chat").find({});
+	if (request.url.startsWith("/chat")){
+		let info = request.url.split("=");
+		console.log(info[1]);
 
-		let chat = cursor.toArray();		
-
-		chat.then( (data) =>{
-			console.log(data);
-
+		let cursor = chat_db.collection("chat").find(query);
+		cursor.toArray().then( (data) => {
 			response.writeHead(200, {'Content-Type': 'text/plain'});
-			response.write( JSON.stringify(data));
+			response.write( JSON.stringify(data) );
 			response.end();
 		});
 
 		return;
 	}
 
-	if (request.url == "/submit"){
-		console.log("send data", request.body);
-		let body = [];
-		request.on('data', (chunk) => {
-			body.push(chunk);
-		}).on('end', () => {
-			let chat_data = JSON.parse(Buffer.concat(body).toString());
+	if (request.url == "/recent"){
+		const estimated_count = chat_db.collection("chat").estimatedDocumentCount();
+		
+		estimated_count.then((count) => {
+			console.log(count);
+
+			const MAX = 5;
 		});
+	
+		}
 
 		response.end();
 		return;
