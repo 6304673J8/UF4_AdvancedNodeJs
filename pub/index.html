@@ -9,14 +9,14 @@
 		<main>
 			<form id="chat-form">
 				<p>
-					<input type="text" name="player" id="player" placeholder="Nombre de Usuario"/>
-					<input type="text" name="chatText" id="chatText" placeholder="Mensaje" />
+					<input type="text" name="user" id="user" placeholder="Nombre de Usuario"/>
+					<input type="text" name="msg" id="msg" placeholder="Mensaje" />
 					<button>Enviar</button>
 				</p>
 
 			</form>
 			<div id="chat">
-				<ul>i</ul>	
+				<ul id="chat-msgs"></ul>	
 
 			</div>
 		</main>
@@ -42,8 +42,8 @@
 
 			document.getElementByID("chat-form").addEventListener('submit', e => {
        				e.preventDefault();
-        			let user = document.getElementByID("player").value;
-				let msg = document.getElementByID("chatText").value;
+        			let user = document.getElementByID("user").value;
+				let msg = document.getElementByID("msg").value;
 
     				fetch("/submit", {
         				method: "POST",
@@ -51,8 +51,8 @@
    					 	'Content-Type': 'text/json'
 					},
 					body: JSON.stringify({
-    						chat_user: user,
-    						chat_msg: msg
+    						user: user,
+    						msg: msg
 					})
 				});
 			});
